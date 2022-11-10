@@ -1,6 +1,7 @@
 package com.example.minimini.model.entity;
 
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,12 +12,14 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 @ToString(exclude = {"orderList"})
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
+
     private String account;
     private String password;
     private String name;
