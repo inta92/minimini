@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class BaseService<Req, Res, Entity> implements CrudInterface<Req, Res> {
 
-    @Autowired
+    @Autowired(required = false)
     protected JpaRepository<Entity, Long> baseRepository;
 }
