@@ -1,6 +1,5 @@
 package com.example.minimini.controller.Api;
 
-import com.example.minimini.ifs.CrudInterface;
 import com.example.minimini.model.entity.Admin;
 import com.example.minimini.model.network.Header;
 import com.example.minimini.model.network.request.AdminApiRequest;
@@ -19,22 +18,25 @@ public class AdminApiController extends CrudController<AdminApiRequest, AdminApi
     @Override
     @PostMapping("")
     public Header<AdminApiResponse> create(@RequestBody Header<AdminApiRequest> request) {
-        return null;
+        return adminApiLogicService.create(request);
     }
 
     @Override
-    public Header<AdminApiResponse> read(Long id) {
-        return null;
+    @GetMapping("{id}")
+    public Header<AdminApiResponse> read(@PathVariable Long id) {
+        return adminApiLogicService.read(id);
     }
 
     @Override
-    public Header<AdminApiResponse> update(Header<AdminApiRequest> request) {
-        return null;
+    @PutMapping("")
+    public Header<AdminApiResponse> update(@RequestBody Header<AdminApiRequest> request) {
+        return adminApiLogicService.update(request);
     }
 
     @Override
-    public Header delete(Long id) {
-        return null;
+    @DeleteMapping("{id}")
+    public Header delete(@PathVariable Long id) {
+        return adminApiLogicService.delete(id);
     }
 }
 

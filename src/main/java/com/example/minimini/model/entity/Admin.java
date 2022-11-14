@@ -22,8 +22,8 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long admId;
-    private String admAccount;
-    private String admPassword;
+    private String account;
+    private String password;
     private int admGrade;
     @LastModifiedDate
     private LocalDateTime finalEditAt;
