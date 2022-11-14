@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class UserApiResponse {
-    private int userId;
+    private Long userId;
     private String account;
     private String password;
     private String name;

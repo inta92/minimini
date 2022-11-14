@@ -40,6 +40,9 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
                 .password(userApiRequest.getPassword())
                 .name(userApiRequest.getName())
                 .phoneNumber(userApiRequest.getPhoneNumber())
+                .address(userApiRequest.getAddress())
+                .gender(userApiRequest.getGender())
+                .age(userApiRequest.getAge())
                 .build();
 
         User newUser = baseRepository.save(user);
