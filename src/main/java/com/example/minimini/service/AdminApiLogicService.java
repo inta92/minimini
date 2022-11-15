@@ -67,6 +67,11 @@ public class AdminApiLogicService extends CrudController<AdminApiRequest,AdminAp
 
     @Override
     public Header delete(Long id) {
-        return null;
+        // 아이디 등 조회 후에
+        Optional<Admin> target = adminRepository.findById(id);
+        return target.map(admin -> {
+          adminRepository.delete(admin);
+          return Header.OK();
+        }).orElseGet(()->Header.ERROR("데이터 없음!!!!"));
     }
 }
