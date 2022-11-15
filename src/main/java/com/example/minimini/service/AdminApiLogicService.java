@@ -24,8 +24,8 @@ public class AdminApiLogicService extends CrudController<AdminApiRequest,AdminAp
     public Header<AdminApiResponse> response(Admin admin) {
         AdminApiResponse adminApiResponse = AdminApiResponse.builder()
                 .admId(admin.getAdmId())
-                .admAccount(admin.getAccount())
-                .admPassword(admin.getPassword())
+                .account(admin.getAccount())
+                .password(admin.getPassword())
                 .admGrade(admin.getAdmGrade())
                 .build();
         return Header.OK(adminApiResponse);
@@ -33,7 +33,14 @@ public class AdminApiLogicService extends CrudController<AdminApiRequest,AdminAp
 
     @Override
     public Header<AdminApiResponse> create(Header<AdminApiRequest> request) {
-        return null;
+        AdminApiRequest adminApiRequest = request.getData();
+        Admin admin = Admin.builder()
+                .account(adminApiRequest.getAdmAccount())
+                .password((adminApiRequest.getAdmPassword()))
+                .admGrade(adminApiRequest.getAdmGrade())
+                .build();
+        Admin newAdmin = adminRepository.save(admin);
+        return response(newAdmin);
     }
 
     @Override

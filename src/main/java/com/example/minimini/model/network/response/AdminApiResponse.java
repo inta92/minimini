@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 public class AdminApiResponse {
 
     private Long admId;
-    private String admAccount;
-    private String admPassword;
+    private String account;
+    private String password;
     private int admGrade;
 }
