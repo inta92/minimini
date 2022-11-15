@@ -35,8 +35,8 @@ public class AdminApiLogicService extends CrudController<AdminApiRequest,AdminAp
     public Header<AdminApiResponse> create(Header<AdminApiRequest> request) {
         AdminApiRequest adminApiRequest = request.getData();
         Admin admin = Admin.builder()
-                .account(adminApiRequest.getAdmAccount())
-                .password((adminApiRequest.getAdmPassword()))
+                .account(adminApiRequest.getAccount())
+                .password((adminApiRequest.getPassword()))
                 .admGrade(adminApiRequest.getAdmGrade())
                 .build();
         Admin newAdmin = adminRepository.save(admin);
