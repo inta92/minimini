@@ -21,6 +21,7 @@ public class AdminApiLogicService extends CrudController<AdminApiRequest,AdminAp
 
     @Autowired
     private AdminRepository adminRepository;
+
     public Header<AdminApiResponse> response(Admin admin) {
         AdminApiResponse adminApiResponse = AdminApiResponse.builder()
                 .admId(admin.getAdmId())
@@ -51,7 +52,17 @@ public class AdminApiLogicService extends CrudController<AdminApiRequest,AdminAp
 
     @Override
     public Header<AdminApiResponse> update(Header<AdminApiRequest> request) {
-        return null;
+        // 아이디 등 조회 후에
+        AdminApiRequest adminApiRequest = request.getData();
+        Optional<Admin> target = adminRepository.findById(adminApiRequest.getAdmId());
+        // 레파지토리에 save
+        return target.map(admin -> {
+            admin.setPassword(adminApiRequest.getPassword());
+            admin.setAdmGrade(adminApiRequest.getAdmGrade());
+            return admin;
+        }).map(admin -> adminRepository.save(admin))
+                .map(admin -> response(admin))
+                .orElseGet(()->Header.ERROR("데이터 없음!"));
     }
 
     @Override
