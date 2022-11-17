@@ -6,8 +6,6 @@ import com.example.minimini.model.entity.User;
 import com.example.minimini.model.network.Header;
 import com.example.minimini.model.network.request.UserApiRequest;
 import com.example.minimini.model.network.response.UserApiResponse;
-import com.example.minimini.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
 
