@@ -64,7 +64,7 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
 
         return user.map(newUser -> {
                     newUser.setAccount(userApiRequest.getAccount())
-                            .setPassword(userApiRequest.getPassword())
+                            .setPassword(userApiRequest.getPasswo())
                             .setName(userApiRequest.getName())
                             .setPhoneNumber(userApiRequest.getPhoneNumber())
                             .setAddress(userApiRequest.getAddress())
