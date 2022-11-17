@@ -28,12 +28,12 @@ public class CrudController<Req, Res, Entity> implements CrudInterface<Req, Res>
     @Override
     @PutMapping("")
     public Header<Res> update(@RequestBody Header<Req> request) {
-        return null;
+        return baseService.update(request);
     }
 
     @Override
     @DeleteMapping("{id}")
     public Header delete(@PathVariable Long id) {
-        return null;
+        return baseService.delete(id);
     }
 }

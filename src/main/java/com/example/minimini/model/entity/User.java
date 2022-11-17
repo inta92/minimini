@@ -1,6 +1,7 @@
 package com.example.minimini.model.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @Builder
 @EntityListeners(AuditingEntityListener.class)
 @ToString(exclude = {"orderList"})
+@Accessors(chain = true)
 public class User {
 
     @Id

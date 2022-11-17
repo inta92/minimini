@@ -20,5 +20,5 @@ public class UserApiResponse {
     private String address;
     private String gender;
     private int age;
-    private LocalDateTime registeredDate;
+    //private LocalDateTime registeredDate;
 }

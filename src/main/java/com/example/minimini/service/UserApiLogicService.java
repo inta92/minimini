@@ -6,6 +6,8 @@ import com.example.minimini.model.entity.User;
 import com.example.minimini.model.network.Header;
 import com.example.minimini.model.network.request.UserApiRequest;
 import com.example.minimini.model.network.response.UserApiResponse;
+import com.example.minimini.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
                 .address(user.getAddress())
                 .gender(user.getGender())
                 .age(user.getAge())
-                .registeredDate(user.getRegisteredDate())
+                //.registeredDate(user.getRegisteredDate())
                 .build();
 
         return Header.OK(userApiResponse);
@@ -58,11 +60,34 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
 
     @Override
     public Header<UserApiResponse> update(Header<UserApiRequest> request) {
-        return null;
+        UserApiRequest userApiRequest = request.getData();
+
+        Optional<User> user = baseRepository.findById(userApiRequest.getUserId());
+
+        return user.map(newUser -> {
+                    newUser.setAccount(userApiRequest.getAccount())
+                            .setPassword(userApiRequest.getPassword())
+                            .setName(userApiRequest.getName())
+                            .setPhoneNumber(userApiRequest.getPhoneNumber())
+                            .setAddress(userApiRequest.getAddress())
+                            .setGender(userApiRequest.getGender())
+                            .setAge(userApiRequest.getAge());
+                    return newUser;
+                }).map(newUser -> baseRepository.save(newUser))
+                .map(newUser -> response(newUser))
+                .orElseGet(()-> Header.ERROR("데이터 없음"));
     }
+
 
     @Override
     public Header delete(Long id) {
-        return null;
+        Optional<User> user = baseRepository.findById(id);
+        //select * from user where id = 1;
+
+        return user.map(newUser -> {
+                    baseRepository.delete(newUser);
+                    return Header.OK();
+                })
+                .orElseGet(()->Header.ERROR("찾는데이터가 없어.."));
     }
 }
